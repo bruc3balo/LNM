@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -38,6 +39,7 @@ fun MakePaymentRequestScreen(
     ) {
         Column(modifier = Modifier.padding(it)) {
 
+
             PaymentMethodSelector(
                 selected = state.value.paymentMethod,
                 onPaymentMethodTypeChanged = viewModel::onPaymentMethodTypeChanged
@@ -45,6 +47,7 @@ fun MakePaymentRequestScreen(
 
             when (val paymentMethod = state.value.paymentForm) {
                 is MakeMpesaPaymentForm -> MpesaPaymentScreen(
+                    isLoading = state.value.isLoading,
                     paymentForm = paymentMethod,
                     state = state.value,
                     onPhoneChanged = viewModel::onPhoneChanged,
@@ -60,6 +63,13 @@ fun MakePaymentRequestScreen(
                 )
 
                 null -> Text("Select a payment method")
+            }
+
+            state.value.errorMessage?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.error
+                )
             }
 
         }
@@ -94,6 +104,7 @@ fun PaymentMethodSelector(
 
 @Composable
 fun MpesaPaymentScreen(
+    isLoading: Boolean,
     paymentForm: MakeMpesaPaymentForm,
     state: MakePaymentRequestState,
     onPhoneChanged: (String) -> Unit,
@@ -181,19 +192,13 @@ fun MpesaPaymentScreen(
             singleLine = true
         )
 
-        Button(
+        if (!isLoading) Button(
             onClick = onPayClicked,
             enabled = !state.isLoading,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(if (state.isLoading) "Processing..." else "Pay with M-Pesa")
-        }
+        } else CircularProgressIndicator()
 
-        state.errorMessage?.let {
-            Text(
-                text = it,
-                color = MaterialTheme.colorScheme.error
-            )
-        }
     }
 }

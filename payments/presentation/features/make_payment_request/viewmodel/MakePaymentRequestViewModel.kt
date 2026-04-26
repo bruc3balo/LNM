@@ -71,7 +71,7 @@ class MakePaymentRequestViewModel @Inject constructor(
     fun onPaymentMethodTypeChanged(paymentMethod: PaymentMethodType) {
         _uiState.update {
             when (paymentMethod) {
-                MPESA -> it.copy(paymentForm = MakeMpesaPaymentForm(), paymentMethod = paymentMethod)
+                MPESA -> it.copy(paymentForm = MakeMpesaPaymentForm.dummyPrefill(), paymentMethod = paymentMethod)
             }
         }
     }
