@@ -1,4 +1,10 @@
 package com.example.lnm.payments.domain.entities
 
-interface PaymentRequest {
-}
+import com.example.lnm.payments.domain.value_objects.Money
+
+class PaymentRequest(
+    val amount: Money,
+    val method: PaymentMethod,
+    val reference: String,
+    val description: String
+)

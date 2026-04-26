@@ -17,6 +17,7 @@ typealias IssuedAt = Date
 class MpesaRemoteDataSource @Inject constructor(
     private val mpesaNetworkRequests: MpesaNetworkRequests
 ) {
+
     private var cachedToken: Pair<IssuedAt, MpesaTokenResponse>? = null
 
     suspend fun lipaNaMpesa(
