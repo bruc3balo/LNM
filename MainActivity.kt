@@ -8,7 +8,7 @@ import com.example.lnm.core.ui.theme.LnmTheme
 import com.example.lnm.navigation.AppNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint //For hilt to inject view models in composables
+@AndroidEntryPoint // For hilt to inject view models in composables
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
