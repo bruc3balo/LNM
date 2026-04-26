@@ -17,6 +17,7 @@ fun AppNavHost() {
         navController = navController,
         startDestination = Destinations.ViewPaymentRequests.route
     ) {
+
         composable(Destinations.MakePaymentRequest.route) {
             MakePaymentRequestScreen()
         }

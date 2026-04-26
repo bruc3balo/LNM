@@ -4,6 +4,7 @@ import android.util.Base64
 import com.example.lnm.core.common.failure.Failure
 import com.example.lnm.core.common.result.TaskResult
 import com.example.lnm.core.network.utils.network_result.NetworkResult
+import com.example.lnm.payments.data.model.request.DarajaAuthenticationRequest
 import com.example.lnm.payments.data.model.request.LipaNaMpesaRequest
 import com.example.lnm.payments.data.model.response.LipaNaMpesaResponse
 import com.example.lnm.payments.data.model.response.MpesaTokenResponse
@@ -18,13 +19,15 @@ class MpesaRemoteDataSource @Inject constructor(
     private val mpesaNetworkRequests: MpesaNetworkRequests
 ) {
 
-    private var cachedToken: Pair<IssuedAt, MpesaTokenResponse>? = null
+    private var cachedToken: Triple<DarajaAuthenticationRequest, IssuedAt, MpesaTokenResponse>? =
+        null
 
     suspend fun lipaNaMpesa(
+        authRequest: DarajaAuthenticationRequest,
         request: LipaNaMpesaRequest
     ): TaskResult<LipaNaMpesaResponse> {
         try {
-            return when (val tokenResponse = getToken()) {
+            return when (val tokenResponse = getToken(authRequest)) {
                 is TaskResult.FailedResult<MpesaTokenResponse> -> TaskResult.FailedResult(
                     tokenResponse.failure
                 )
@@ -53,18 +56,21 @@ class MpesaRemoteDataSource @Inject constructor(
             return TaskResult.FailedResult(failure = Failure(exception = e))
         }
     }
-    suspend fun getToken(): TaskResult<MpesaTokenResponse> {
+
+    suspend fun getToken(
+        authRequest: DarajaAuthenticationRequest,
+    ): TaskResult<MpesaTokenResponse> {
         try {
 
             if (canReuseToken()) {
                 return TaskResult.SuccessResult(
-                    data = cachedToken!!.second,
+                    data = cachedToken!!.third,
                     message = "Token reused"
                 )
             }
 
             // TODO: Inject Credentials
-            val credentials = "consumerKey:consumerSecret"
+            val credentials = "${authRequest.consumerKey}:${authRequest.consumerSecret}"
             val encodedAuthorizationToken = Base64.encodeToString(
                 credentials.toByteArray(),
                 Base64.NO_WRAP
@@ -81,8 +87,9 @@ class MpesaRemoteDataSource @Inject constructor(
                     )
                 )
 
+
                 is NetworkResult.Success<MpesaTokenResponse> -> {
-                    cachedToken = Date() to result.data
+                    cachedToken = Triple(first = authRequest, second = Date(), third = result.data)
                     TaskResult.SuccessResult(data = result.data, message = "New token obtained")
                 }
             }
@@ -90,11 +97,12 @@ class MpesaRemoteDataSource @Inject constructor(
             return TaskResult.FailedResult(failure = Failure(exception = e))
         }
     }
+
     private fun canReuseToken(): Boolean {
         val cached = cachedToken ?: return false
 
-        val issuedAt: IssuedAt = cached.first
-        val token = cached.second
+        val issuedAt: IssuedAt = cached.second
+        val token = cached.third
 
         val expiryDuration = token.expiresInMs.toLong().milliseconds
         val expiryTime = issuedAt.time + expiryDuration.inWholeMilliseconds
