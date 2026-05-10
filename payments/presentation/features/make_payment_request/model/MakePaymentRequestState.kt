@@ -1,4 +1,4 @@
-package com.example.lnm.payments.presentation.features.make_payment_request.state
+package com.example.lnm.payments.presentation.features.make_payment_request.model
 
 import com.example.lnm.core.common.result.TaskResult
 import com.example.lnm.payments.domain.entities.PaymentResult

@@ -2,7 +2,7 @@ package com.example.lnm.payments.presentation.features.make_payment_request.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.lnm.payments.data.model.request.DarajaAuthenticationRequest
+import com.example.lnm.payments.data.model.remote.request.DarajaAuthenticationRequest
 import com.example.lnm.payments.domain.entities.PaymentRequest
 import com.example.lnm.payments.domain.entities.payment_method.MpesaPaymentMethod
 import com.example.lnm.payments.domain.entities.payment_method.PaymentMethodType
@@ -14,8 +14,8 @@ import com.example.lnm.payments.domain.value_objects.MpesaAccount
 import com.example.lnm.payments.domain.value_objects.MpesaPaymentDescription
 import com.example.lnm.payments.domain.value_objects.MpesaPhoneNumber
 import com.example.lnm.payments.domain.value_objects.MpesaShortCode
-import com.example.lnm.payments.presentation.features.make_payment_request.state.MakeMpesaPaymentForm
-import com.example.lnm.payments.presentation.features.make_payment_request.state.MakePaymentRequestState
+import com.example.lnm.payments.presentation.features.make_payment_request.model.MakeMpesaPaymentForm
+import com.example.lnm.payments.presentation.features.make_payment_request.model.MakePaymentRequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +29,6 @@ class MakePaymentRequestViewModel @Inject constructor(
     private val initiatePaymentUseCase: InitiatePaymentUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(value = MakePaymentRequestState())
-
     val uiState = _uiState.asStateFlow()
 
     fun onAmountChanged(amount: String) {

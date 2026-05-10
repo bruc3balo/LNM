@@ -1,4 +1,4 @@
-package com.example.lnm.payments.data.model.request
+package com.example.lnm.payments.data.model.remote.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

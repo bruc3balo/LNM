@@ -1,4 +1,4 @@
-package com.example.lnm.payments.data.remote
+package com.example.lnm.payments.data.data_source.remote
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -22,14 +22,14 @@ object MpesaNetworkModule {
     fun provideMpesaRetrofit(
         client: OkHttpClient,
         json: Json
-    ): Retrofit =
-        Retrofit.Builder()
+    ): Retrofit = Retrofit.Builder()
             .baseUrl("https://sandbox.safaricom.co.ke/")
             .client(client)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
 
     @Provides
+    @Singleton
     fun provideMpesaApi(
         @MpesaRetrofit retrofit: Retrofit
     ): MpesaApi = retrofit.create(MpesaApi::class.java)

@@ -1,4 +1,4 @@
-package com.example.lnm.payments.presentation.features.make_payment_request.state
+package com.example.lnm.payments.presentation.features.make_payment_request.model
 
 data class MakeMpesaPaymentForm(
     val amount: String = "",

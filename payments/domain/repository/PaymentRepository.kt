@@ -6,4 +6,6 @@ import com.example.lnm.payments.domain.entities.PaymentResult
 
 interface PaymentRepository {
     suspend fun initiatePayment(request: PaymentRequest): TaskResult<PaymentResult>
+    suspend fun getPaymentResults(): TaskResult<List<PaymentResult>>
+    suspend fun deletePaymentResult(transactionId: String) : TaskResult<Unit>
 }

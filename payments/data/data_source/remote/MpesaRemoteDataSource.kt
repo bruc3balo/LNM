@@ -1,13 +1,13 @@
-package com.example.lnm.payments.data.remote
+package com.example.lnm.payments.data.data_source.remote
 
 import android.util.Base64
 import com.example.lnm.core.common.failure.Failure
 import com.example.lnm.core.common.result.TaskResult
 import com.example.lnm.core.network.utils.network_result.NetworkResult
-import com.example.lnm.payments.data.model.request.DarajaAuthenticationRequest
-import com.example.lnm.payments.data.model.request.LipaNaMpesaRequest
-import com.example.lnm.payments.data.model.response.LipaNaMpesaResponse
-import com.example.lnm.payments.data.model.response.MpesaTokenResponse
+import com.example.lnm.payments.data.model.remote.request.DarajaAuthenticationRequest
+import com.example.lnm.payments.data.model.remote.request.LipaNaMpesaRequest
+import com.example.lnm.payments.data.model.remote.response.LipaNaMpesaResponse
+import com.example.lnm.payments.data.model.remote.response.MpesaTokenResponse
 import java.util.Date
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds

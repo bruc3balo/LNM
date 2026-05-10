@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.lnm.payments.presentation.features.make_payment_request.screens.MakePaymentRequestScreen
-import com.example.lnm.payments.presentation.features.view_payment_requests.events.ViewPaymentRequestsEvent
-import com.example.lnm.payments.presentation.features.view_payment_requests.screens.ViewPaymentRequestsScreen
+import com.example.lnm.payments.presentation.features.make_payment_request.view.MakePaymentRequestScreen
+import com.example.lnm.payments.presentation.features.view_payment_requests.model.ViewPaymentRequestsEvent
+import com.example.lnm.payments.presentation.features.view_payment_requests.view.ViewPaymentRequestsScreen
 
 @Composable
 fun AppNavHost() {

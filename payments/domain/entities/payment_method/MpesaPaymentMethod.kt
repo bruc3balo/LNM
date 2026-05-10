@@ -1,6 +1,6 @@
 package com.example.lnm.payments.domain.entities.payment_method
 
-import com.example.lnm.payments.data.model.request.DarajaAuthenticationRequest
+import com.example.lnm.payments.data.model.remote.request.DarajaAuthenticationRequest
 import com.example.lnm.payments.domain.value_objects.DarajaPassKey
 import com.example.lnm.payments.domain.value_objects.Money
 import com.example.lnm.payments.domain.value_objects.MpesaAccount

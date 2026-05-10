@@ -3,10 +3,10 @@ package com.example.lnm.payments.data.service
 import android.util.Base64
 import com.example.lnm.core.common.failure.Failure
 import com.example.lnm.core.common.result.TaskResult
-import com.example.lnm.payments.data.model.request.DarajaAuthenticationRequest
-import com.example.lnm.payments.data.model.request.LipaNaMpesaRequest
-import com.example.lnm.payments.data.model.response.LipaNaMpesaResponse
-import com.example.lnm.payments.data.remote.MpesaRemoteDataSource
+import com.example.lnm.payments.data.data_source.remote.MpesaRemoteDataSource
+import com.example.lnm.payments.data.model.remote.request.DarajaAuthenticationRequest
+import com.example.lnm.payments.data.model.remote.request.LipaNaMpesaRequest
+import com.example.lnm.payments.data.model.remote.response.LipaNaMpesaResponse
 import com.example.lnm.payments.domain.entities.PaymentResult
 import com.example.lnm.payments.domain.entities.PaymentStatus
 import com.example.lnm.payments.domain.value_objects.DarajaPassKey
@@ -18,6 +18,7 @@ import com.example.lnm.payments.domain.value_objects.MpesaShortCode
 import java.net.URI
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.Locale
 import javax.inject.Inject
 
@@ -72,7 +73,8 @@ class MpesaPaymentProcessorService @Inject constructor(
                         data = PaymentResult(
                             transactionId = result.data.checkoutRequestId,
                             status = PaymentStatus.PENDING,
-                            message = result.data.customerMessage
+                            message = result.data.customerMessage,
+                            date = LocalDateTime.now()
                         ),
                         message = result.message
                     )

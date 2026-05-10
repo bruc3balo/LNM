@@ -1,4 +1,4 @@
-package com.example.lnm.payments.presentation.features.make_payment_request.screens
+package com.example.lnm.payments.presentation.features.make_payment_request.view
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -22,8 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.lnm.payments.domain.entities.payment_method.PaymentMethodType
-import com.example.lnm.payments.presentation.features.make_payment_request.state.MakeMpesaPaymentForm
-import com.example.lnm.payments.presentation.features.make_payment_request.state.MakePaymentRequestState
+import com.example.lnm.payments.presentation.features.make_payment_request.model.MakeMpesaPaymentForm
+import com.example.lnm.payments.presentation.features.make_payment_request.model.MakePaymentRequestState
 import com.example.lnm.payments.presentation.features.make_payment_request.viewmodel.MakePaymentRequestViewModel
 
 @Composable
@@ -32,13 +32,11 @@ fun MakePaymentRequestScreen(
 ) {
     val state = viewModel.uiState.collectAsState()
 
-    Scaffold(
-        topBar = {
-
-        }
-    ) {
-        Column(modifier = Modifier.padding(it)) {
-
+    Scaffold {
+        Column(
+            modifier = Modifier
+            .padding(it)
+        ) {
 
             PaymentMethodSelector(
                 selected = state.value.paymentMethod,
@@ -61,7 +59,6 @@ fun MakePaymentRequestScreen(
                     onConsumerSecretChanged = viewModel::onConsumerSecretChanged,
                     onPayClicked = viewModel::initiatePayment
                 )
-
                 null -> Text("Select a payment method")
             }
 

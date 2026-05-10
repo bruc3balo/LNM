@@ -1,8 +1,8 @@
-package com.example.lnm.payments.data.remote
+package com.example.lnm.payments.data.data_source.remote
 
-import com.example.lnm.payments.data.model.request.LipaNaMpesaRequest
-import com.example.lnm.payments.data.model.response.LipaNaMpesaResponse
-import com.example.lnm.payments.data.model.response.MpesaTokenResponse
+import com.example.lnm.payments.data.model.remote.request.LipaNaMpesaRequest
+import com.example.lnm.payments.data.model.remote.response.LipaNaMpesaResponse
+import com.example.lnm.payments.data.model.remote.response.MpesaTokenResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
