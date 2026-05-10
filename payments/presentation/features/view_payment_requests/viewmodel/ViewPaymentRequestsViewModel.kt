@@ -23,6 +23,10 @@ class ViewPaymentRequestsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ViewPaymentRequestsState(paymentResults = emptyList()))
     val uiState = _uiState.asStateFlow()
 
+    init {
+        loadResults()
+    }
+
 
     fun loadResults() {
         if (uiState.value.isLoading) return

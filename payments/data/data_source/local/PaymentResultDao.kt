@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface PaymentResultDao {
 
     @Upsert
-    suspend fun savePaymentResult(paymentResult: LocalPaymentResult) : LocalPaymentResult
+    suspend fun savePaymentResult(paymentResult: LocalPaymentResult)
 
     @Query("DELETE FROM payment_results WHERE transactionId = :transactionId")
     suspend fun deletePaymentResultByTransactionId(transactionId: String)

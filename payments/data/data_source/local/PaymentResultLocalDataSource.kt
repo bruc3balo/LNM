@@ -9,7 +9,8 @@ class PaymentResultLocalDataSource @Inject constructor(
 ) {
 
     suspend fun storePaymentResult(paymentResult: LocalPaymentResult): LocalPaymentResult {
-        return paymentResultDao.savePaymentResult(paymentResult)
+        paymentResultDao.savePaymentResult(paymentResult)
+        return paymentResult
     }
 
     suspend fun deletePaymentResultByTransactionId(transactionId: String) {
